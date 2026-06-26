@@ -10,26 +10,14 @@ import {
   Eye,
   EyeOff,
   ArrowRight,
-  User,
   Store,
-  Shield,
 } from "lucide-react";
 import { Logo } from "@/components/brand/logo";
 import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
 
-const roles = [
-  { key: "customer", label: "Customer", icon: User, dest: "/" },
-  { key: "seller", label: "Seller", icon: Store, dest: "/seller" },
-  { key: "admin", label: "Admin", icon: Shield, dest: "/admin" },
-] as const;
-
-export default function LoginPage() {
+export default function RegisterPage() {
   const router = useRouter();
-  const [role, setRole] = useState<(typeof roles)[number]["key"]>("customer");
   const [show, setShow] = useState(false);
-
-  const active = roles.find((r) => r.key === role)!;
 
   return (
     <div className="grid min-h-screen lg:grid-cols-2">
@@ -41,19 +29,17 @@ export default function LoginPage() {
         </Link>
         <div className="relative">
           <h1 className="font-display text-4xl font-extrabold leading-tight text-white">
-            More shops.
-            <br />
-            More trust.
+            Join Aaro today.
           </h1>
           <p className="mt-4 max-w-sm text-emerald-50/90">
-            Bangladesh&apos;s trusted marketplace — verified shops, real ratings, and
-            cash on delivery you can rely on.
+            Create your free account to shop from thousands of verified Bangladeshi
+            shops — with cash on delivery and buyer protection on every order.
           </p>
           <ul className="mt-8 space-y-3">
             {[
               { icon: ShieldCheck, t: "Verified sellers only" },
               { icon: Truck, t: "Cash on delivery nationwide" },
-              { icon: Star, t: "Real ratings & complaint support" },
+              { icon: Star, t: "Save your favourites & track orders" },
             ].map((x) => (
               <li key={x.t} className="flex items-center gap-3 text-emerald-50">
                 <span className="grid h-9 w-9 place-items-center rounded-xl bg-white/15 backdrop-blur">
@@ -74,51 +60,44 @@ export default function LoginPage() {
             <Logo />
           </div>
 
-          <h2 className="font-display text-2xl font-extrabold text-ink">Welcome back</h2>
-          <p className="mt-1 text-sm text-muted">Sign in to continue to Aaro.</p>
-
-          {/* role tabs */}
-          <div className="mt-6 grid grid-cols-3 gap-2 rounded-xl bg-canvas p-1">
-            {roles.map((r) => (
-              <button
-                key={r.key}
-                onClick={() => setRole(r.key)}
-                className={cn(
-                  "flex flex-col items-center gap-1 rounded-lg py-2.5 text-xs font-semibold transition-colors",
-                  role === r.key ? "bg-surface text-brand-700 shadow-sm" : "text-muted hover:text-ink",
-                )}
-              >
-                <r.icon className="h-4 w-4" />
-                {r.label}
-              </button>
-            ))}
-          </div>
+          <h2 className="font-display text-2xl font-extrabold text-ink">Create your account</h2>
+          <p className="mt-1 text-sm text-muted">It only takes a minute.</p>
 
           <form
             className="mt-6 space-y-4"
             onSubmit={(e) => {
               e.preventDefault();
-              router.push(active.dest);
+              router.push("/");
             }}
           >
             <div>
-              <label className="text-xs font-semibold text-muted">
-                {role === "customer" ? "Phone or email" : "Email"}
-              </label>
+              <label className="text-xs font-semibold text-muted">Full name</label>
               <input
-                placeholder={role === "customer" ? "01XXXXXXXXX" : "you@shop.com"}
+                placeholder="Your name"
                 className="mt-1 h-11 w-full rounded-xl border border-line bg-canvas px-3 text-sm outline-none placeholder:text-faint focus:border-brand-400 focus:bg-surface focus:ring-2 focus:ring-brand-500/20"
               />
             </div>
             <div>
-              <div className="flex items-center justify-between">
-                <label className="text-xs font-semibold text-muted">Password</label>
-                <Link href="#" className="text-xs font-semibold text-brand-700">Forgot?</Link>
-              </div>
+              <label className="text-xs font-semibold text-muted">Phone number</label>
+              <input
+                placeholder="01XXXXXXXXX"
+                className="mt-1 h-11 w-full rounded-xl border border-line bg-canvas px-3 text-sm outline-none placeholder:text-faint focus:border-brand-400 focus:bg-surface focus:ring-2 focus:ring-brand-500/20"
+              />
+            </div>
+            <div>
+              <label className="text-xs font-semibold text-muted">Email (optional)</label>
+              <input
+                type="email"
+                placeholder="you@email.com"
+                className="mt-1 h-11 w-full rounded-xl border border-line bg-canvas px-3 text-sm outline-none placeholder:text-faint focus:border-brand-400 focus:bg-surface focus:ring-2 focus:ring-brand-500/20"
+              />
+            </div>
+            <div>
+              <label className="text-xs font-semibold text-muted">Password</label>
               <div className="relative mt-1">
                 <input
                   type={show ? "text" : "password"}
-                  placeholder="••••••••"
+                  placeholder="Create a password"
                   className="h-11 w-full rounded-xl border border-line bg-canvas px-3 pr-10 text-sm outline-none placeholder:text-faint focus:border-brand-400 focus:bg-surface focus:ring-2 focus:ring-brand-500/20"
                 />
                 <button
@@ -131,29 +110,28 @@ export default function LoginPage() {
               </div>
             </div>
 
+            <label className="flex cursor-pointer items-start gap-2 text-xs text-muted">
+              <input type="checkbox" className="mt-0.5 h-4 w-4 rounded border-line accent-brand-600" />
+              I agree to Aaro&apos;s Terms and Privacy Policy.
+            </label>
+
             <Button type="submit" variant="primary" size="lg" className="w-full">
-              Sign in as {active.label}
+              Create account
               <ArrowRight className="h-4 w-4" />
             </Button>
           </form>
 
           <p className="mt-6 text-center text-sm text-muted">
-            {role === "seller" ? (
-              <>
-                New seller?{" "}
-                <Link href="/seller/register" className="font-semibold text-brand-700">
-                  Create a shop
-                </Link>
-              </>
-            ) : (
-              <>
-                New to Aaro?{" "}
-                <Link href="/register" className="font-semibold text-brand-700">
-                  Create an account
-                </Link>
-              </>
-            )}
+            Already have an account?{" "}
+            <Link href="/login" className="font-semibold text-brand-700">Sign in</Link>
           </p>
+
+          <div className="mt-4 rounded-xl border border-line bg-canvas p-3 text-center text-sm">
+            <span className="text-muted">Want to sell instead? </span>
+            <Link href="/seller/register" className="inline-flex items-center gap-1 font-semibold text-brand-700">
+              <Store className="h-4 w-4" /> Become a seller
+            </Link>
+          </div>
         </div>
       </div>
     </div>

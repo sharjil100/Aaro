@@ -3,6 +3,7 @@ import { Thumb } from "@/components/store/thumb";
 import { Button } from "@/components/ui/button";
 import { products, getSeller, getCategory } from "@/lib/data";
 import { formatBDT } from "@/lib/utils";
+import { productKeyword } from "@/lib/images";
 
 export const metadata = { title: "Product Moderation" };
 
@@ -30,7 +31,7 @@ export default function AdminProducts() {
           const cat = getCategory(p.categorySlug);
           return (
             <div key={p.id} className="flex flex-col gap-4 rounded-2xl border border-line bg-surface p-4 shadow-card sm:flex-row sm:items-center">
-              <Thumb seed={p.slug} label={p.title} className="h-20 w-20 shrink-0" rounded="rounded-xl" />
+              <Thumb seed={p.slug} label={p.title} query={productKeyword(p.categorySlug)} className="h-20 w-20 shrink-0" rounded="rounded-xl" />
               <div className="min-w-0 flex-1">
                 <h3 className="font-medium text-ink">{p.title}</h3>
                 <p className="mt-0.5 text-xs text-faint">

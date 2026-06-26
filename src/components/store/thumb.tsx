@@ -1,4 +1,8 @@
+"use client";
+
+import { useState } from "react";
 import { cn, hashIndex } from "@/lib/utils";
+import { loremflickrUrl, picsumUrl } from "@/lib/images";
 
 const palettes = [
   "from-emerald-100 to-teal-200",
@@ -12,18 +16,20 @@ const palettes = [
 ];
 
 /**
- * Branded placeholder "image" tile. Deterministic gradient + monogram so the
- * catalogue looks designed without external image dependencies. Real product
- * images plug in here in Phase 1 (next/image + Cloudflare R2).
+ * Image tile. When `query` is given, loads a relevant photo (loremflickr →
+ * picsum fallback) over a branded gradient/monogram. If both photos fail, the
+ * gradient remains — so the UI never shows a broken image.
  */
 export function Thumb({
   seed,
   label,
+  query,
   className,
   rounded = "rounded-xl",
 }: {
   seed: string;
   label: string;
+  query?: string;
   className?: string;
   rounded?: string;
 }) {
@@ -36,6 +42,11 @@ export function Thumb({
     .map((w) => w[0])
     .join("")
     .toUpperCase();
+
+  // 0 = relevant photo, 1 = fallback photo, 2 = gradient only
+  const [step, setStep] = useState(0);
+  const showImg = !!query && step < 2;
+  const src = step === 0 ? loremflickrUrl(query ?? "product", seed) : picsumUrl(seed);
 
   return (
     <div
@@ -51,6 +62,18 @@ export function Thumb({
       <span className="relative font-display text-3xl font-extrabold text-ink/20 select-none">
         {initials || "AA"}
       </span>
+      {showImg && (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          key={src}
+          src={src}
+          alt={label}
+          loading="lazy"
+          referrerPolicy="no-referrer"
+          onError={() => setStep((s) => s + 1)}
+          className="absolute inset-0 h-full w-full object-cover"
+        />
+      )}
     </div>
   );
 }

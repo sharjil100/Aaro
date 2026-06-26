@@ -17,6 +17,7 @@ import { VerifiedBadge } from "@/components/store/verified-badge";
 import { ProductCard } from "@/components/store/product-card";
 import { Button } from "@/components/ui/button";
 import { getSellerBySlug, productsBySeller } from "@/lib/data";
+import { SHOP_KEYWORD } from "@/lib/images";
 
 export default async function ShopPage({
   params,
@@ -55,6 +56,7 @@ export default async function ShopPage({
               <Thumb
                 seed={seller.slug}
                 label={seller.shopName}
+                query={SHOP_KEYWORD}
                 className="h-24 w-24 ring-4 ring-surface"
                 rounded="rounded-3xl"
               />

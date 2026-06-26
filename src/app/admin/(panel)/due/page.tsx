@@ -13,6 +13,7 @@ import { Thumb } from "@/components/store/thumb";
 import { Button } from "@/components/ui/button";
 import { sellers } from "@/lib/data";
 import { formatBDT } from "@/lib/utils";
+import { SHOP_KEYWORD } from "@/lib/images";
 
 export const metadata = { title: "Due Management" };
 
@@ -66,7 +67,7 @@ export default function AdminDue() {
                     <tr key={s.id} className="border-b border-line last:border-0 hover:bg-canvas">
                       <td className="px-5 py-3">
                         <div className="flex items-center gap-3">
-                          <Thumb seed={s.slug} label={s.shopName} className="h-9 w-9 shrink-0" rounded="rounded-lg" />
+                          <Thumb seed={s.slug} label={s.shopName} query={SHOP_KEYWORD} className="h-9 w-9 shrink-0" rounded="rounded-lg" />
                           <span className="font-medium text-ink">{s.shopName}</span>
                         </div>
                       </td>

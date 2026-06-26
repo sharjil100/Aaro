@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { getSeller } from "@/lib/data";
 import type { Product } from "@/lib/types";
 import { cn, discountPct, formatBDT } from "@/lib/utils";
+import { productKeyword } from "@/lib/images";
 
 export function ProductCard({
   product,
@@ -30,6 +31,7 @@ export function ProductCard({
         <Thumb
           seed={product.slug}
           label={product.title}
+          query={productKeyword(product.categorySlug)}
           className="h-full w-full"
           rounded="rounded-xl"
         />

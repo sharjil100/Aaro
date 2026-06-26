@@ -13,6 +13,7 @@ import { Thumb } from "@/components/store/thumb";
 import { Button } from "@/components/ui/button";
 import { products, getSeller } from "@/lib/data";
 import { formatBDT } from "@/lib/utils";
+import { productKeyword } from "@/lib/images";
 
 export const metadata = { title: "Your Cart" };
 
@@ -49,7 +50,7 @@ export default function CartPage() {
         <div className="space-y-4 lg:col-span-2">
           {lines.map((l) => (
             <div key={l.product.id} className="flex gap-4 rounded-2xl border border-line bg-surface p-4 shadow-card">
-              <Thumb seed={l.product.slug} label={l.product.title} className="h-24 w-24 shrink-0" rounded="rounded-xl" />
+              <Thumb seed={l.product.slug} label={l.product.title} query={productKeyword(l.product.categorySlug)} className="h-24 w-24 shrink-0" rounded="rounded-xl" />
               <div className="min-w-0 flex-1">
                 <div className="flex items-start justify-between gap-3">
                   <Link href={`/product/${l.product.slug}`} className="line-clamp-2 font-medium text-ink hover:text-brand-700">

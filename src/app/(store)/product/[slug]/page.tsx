@@ -27,6 +27,7 @@ import {
   productsByCategory,
 } from "@/lib/data";
 import { cn, discountPct, formatBDT } from "@/lib/utils";
+import { productKeyword } from "@/lib/images";
 
 const reviews = [
   { name: "Sumaiya R.", rating: 5, text: "Exactly as described, fast delivery and the seller was very responsive. Highly recommend!", ago: "3 days ago" },
@@ -72,7 +73,7 @@ export default async function ProductPage({
         {/* gallery */}
         <div className="lg:sticky lg:top-32 lg:self-start">
           <div className="overflow-hidden rounded-3xl border border-line bg-surface p-3 shadow-card">
-            <Thumb seed={product.slug} label={product.title} className="aspect-square w-full" rounded="rounded-2xl" />
+            <Thumb seed={product.slug} label={product.title} query={productKeyword(product.categorySlug)} className="aspect-square w-full" rounded="rounded-2xl" />
           </div>
           <div className="mt-3 flex gap-3">
             {[0, 1, 2, 3].map((i) => (
@@ -83,7 +84,7 @@ export default async function ProductPage({
                   i === 0 ? "border-brand-500 ring-2 ring-brand-500/20" : "border-line",
                 )}
               >
-                <Thumb seed={product.slug + i} label={product.title} className="h-full w-full" />
+                <Thumb seed={product.slug + i} label={product.title} query={productKeyword(product.categorySlug)} className="h-full w-full" />
               </div>
             ))}
           </div>

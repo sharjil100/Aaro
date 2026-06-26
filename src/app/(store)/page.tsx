@@ -24,6 +24,7 @@ import {
   trustedSellers,
 } from "@/lib/data";
 import { cn } from "@/lib/utils";
+import { productKeyword } from "@/lib/images";
 
 function SectionHeader({
   eyebrow,
@@ -140,7 +141,7 @@ export default function HomePage() {
                     key={p.id}
                     className="overflow-hidden rounded-2xl bg-white/90 p-2 shadow-card backdrop-blur"
                   >
-                    <Thumb seed={p.slug} label={p.title} className="h-full w-full" />
+                    <Thumb seed={p.slug} label={p.title} query={productKeyword(p.categorySlug)} className="h-full w-full" />
                   </div>
                 ))}
               </div>

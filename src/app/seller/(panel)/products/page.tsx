@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { productsBySeller } from "@/lib/data";
 import { cn, formatBDT } from "@/lib/utils";
+import { productKeyword } from "@/lib/images";
 
 export const metadata = { title: "Products" };
 
@@ -44,7 +45,7 @@ export default function SellerProducts() {
                 <tr key={p.id} className="border-b border-line last:border-0 hover:bg-canvas">
                   <td className="px-5 py-3">
                     <div className="flex items-center gap-3">
-                      <Thumb seed={p.slug} label={p.title} className="h-11 w-11 shrink-0" rounded="rounded-lg" />
+                      <Thumb seed={p.slug} label={p.title} query={productKeyword(p.categorySlug)} className="h-11 w-11 shrink-0" rounded="rounded-lg" />
                       <span className="line-clamp-1 max-w-[220px] font-medium text-ink">{p.title}</span>
                     </div>
                   </td>

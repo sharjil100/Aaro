@@ -6,6 +6,7 @@ import { VerifiedBadge } from "./verified-badge";
 import { buttonVariants } from "@/components/ui/button";
 import type { Seller } from "@/lib/types";
 import { cn } from "@/lib/utils";
+import { SHOP_KEYWORD } from "@/lib/images";
 
 export function SellerCard({ seller }: { seller: Seller }) {
   return (
@@ -18,6 +19,7 @@ export function SellerCard({ seller }: { seller: Seller }) {
           <Thumb
             seed={seller.slug}
             label={seller.shopName}
+            query={SHOP_KEYWORD}
             className="h-16 w-16 ring-4 ring-surface"
             rounded="rounded-2xl"
           />

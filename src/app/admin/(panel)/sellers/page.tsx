@@ -4,6 +4,7 @@ import { VerifiedBadge } from "@/components/store/verified-badge";
 import { Thumb } from "@/components/store/thumb";
 import { sellers } from "@/lib/data";
 import { formatBDT } from "@/lib/utils";
+import { SHOP_KEYWORD } from "@/lib/images";
 
 export const metadata = { title: "Sellers" };
 
@@ -59,7 +60,7 @@ export default function AdminSellers() {
                 <tr key={s.id} className="border-b border-line last:border-0 hover:bg-canvas">
                   <td className="px-5 py-3">
                     <div className="flex items-center gap-3">
-                      <Thumb seed={s.slug} label={s.shopName} className="h-10 w-10 shrink-0" rounded="rounded-lg" />
+                      <Thumb seed={s.slug} label={s.shopName} query={SHOP_KEYWORD} className="h-10 w-10 shrink-0" rounded="rounded-lg" />
                       <div className="min-w-0">
                         <span className="block font-medium text-ink">{s.shopName}</span>
                         <span className="block text-xs text-faint">{s.ownerName} · {s.city}</span>
