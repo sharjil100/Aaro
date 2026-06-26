@@ -1,0 +1,131 @@
+@import "tailwindcss";
+
+/* ============================================================================
+   Aaro Design System — "More shops. More trust."
+   A premium, trust-forward marketplace identity for Bangladesh.
+   - Brand emerald/teal = trust, safety, verified shops
+   - Warm gold accent   = deals, ratings, highlights
+============================================================================ */
+
+@theme {
+  /* Brand — emerald / teal */
+  --color-brand-50: #ecfdf5;
+  --color-brand-100: #d1fae5;
+  --color-brand-200: #a7f3d0;
+  --color-brand-300: #6ee7b7;
+  --color-brand-400: #34d399;
+  --color-brand-500: #10b981;
+  --color-brand-600: #059669;
+  --color-brand-700: #047857;
+  --color-brand-800: #065f46;
+  --color-brand-900: #064e3b;
+  --color-brand-950: #022c22;
+
+  /* Accent — warm gold */
+  --color-accent-50: #fffbeb;
+  --color-accent-100: #fef3c7;
+  --color-accent-200: #fde68a;
+  --color-accent-300: #fcd34d;
+  --color-accent-400: #fbbf24;
+  --color-accent-500: #f59e0b;
+  --color-accent-600: #d97706;
+
+  /* Verified / info blue */
+  --color-trust-500: #3b82f6;
+  --color-trust-600: #2563eb;
+
+  /* Neutrals — green-tinted ink + soft surfaces */
+  --color-ink: #0c1a14;
+  --color-muted: #5c6b64;
+  --color-faint: #8a978f;
+  --color-line: #e7ece9;
+  --color-surface: #ffffff;
+  --color-canvas: #f5f8f6;
+
+  /* Typography */
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-jakarta), var(--font-inter), ui-sans-serif, sans-serif;
+
+  /* Radius */
+  --radius-xl2: 1.1rem;
+
+  /* Shadows */
+  --shadow-card: 0 1px 2px rgba(12, 26, 20, 0.04), 0 10px 30px -16px rgba(12, 26, 20, 0.18);
+  --shadow-pop: 0 8px 40px -8px rgba(12, 26, 20, 0.22);
+  --shadow-glow: 0 10px 36px -10px rgba(5, 150, 105, 0.45);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-line);
+  }
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    background: var(--color-canvas);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    letter-spacing: -0.022em;
+  }
+  ::selection {
+    background: var(--color-brand-600);
+    color: #fff;
+  }
+  /* Refined focus ring */
+  :focus-visible {
+    outline: 2px solid var(--color-brand-500);
+    outline-offset: 2px;
+  }
+}
+
+/* ---- Utilities -------------------------------------------------------- */
+.container-aaro {
+  margin-inline: auto;
+  width: 100%;
+  max-width: 1280px;
+  padding-inline: 1rem;
+}
+@media (min-width: 640px) {
+  .container-aaro { padding-inline: 1.5rem; }
+}
+@media (min-width: 1024px) {
+  .container-aaro { padding-inline: 2rem; }
+}
+
+.text-balance { text-wrap: balance; }
+.text-pretty { text-wrap: pretty; }
+
+.bg-grid {
+  background-image: radial-gradient(circle at 1px 1px, rgba(12, 26, 20, 0.05) 1px, transparent 0);
+  background-size: 22px 22px;
+}
+
+.gradient-brand {
+  background-image: linear-gradient(135deg, #065f46 0%, #059669 55%, #10b981 100%);
+}
+
+.gradient-mesh {
+  background-color: #064e3b;
+  background-image:
+    radial-gradient(at 18% 22%, rgba(16, 185, 129, 0.55) 0px, transparent 50%),
+    radial-gradient(at 82% 8%, rgba(52, 211, 153, 0.45) 0px, transparent 45%),
+    radial-gradient(at 75% 88%, rgba(4, 120, 87, 0.65) 0px, transparent 55%),
+    radial-gradient(at 25% 92%, rgba(6, 95, 70, 0.6) 0px, transparent 50%);
+}
+
+/* hide scrollbar for horizontal rails */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+@keyframes aaro-marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.animate-marquee { animation: aaro-marquee 26s linear infinite; }
